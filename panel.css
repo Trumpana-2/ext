@@ -1,0 +1,20 @@
+/* Extra CSS for overlays and checkmark, included as web_accessible_resource */
+.wavas-hover { outline: 2px solid #00ff00 !important; }
+.wavas-selected { outline: 2px solid #0080ff !important; }
+.wavas-checkmark { pointer-events: none; }
+#wavas-download-btn {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 2147483647;
+  background: #0080ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  opacity: 0.95;
+}
+#wavas-download-btn[disabled] { opacity: 0.5; cursor: not-allowed; }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wavas</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 16px; width: 200px; }
+    label { display: flex; align-items: center; gap: 8px; }
+    button { margin-top: 12px; width: 100%; }
+  </style>
+</head>
+<body>
+  <label>
+    <input type="checkbox" id="wavas-toggle">
+    Enable Wavas
+  </label>
+  <button id="wavas-reload">Reload Page</button>
+  <script>
+    const toggle = document.getElementById('wavas-toggle');
+    const reloadBtn = document.getElementById('wavas-reload');
+    chrome.storage.local.get(['wavasEnabled'], ({ wavasEnabled }) => {
+      toggle.checked = !!wavasEnabled;
+    });
+    toggle.addEventListener('change', () => {
+      chrome.storage.local.set({ wavasEnabled: toggle.checked }, () => {
+        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+          if (tabs[0]) chrome.tabs.reload(tabs[0].id);
+        });
+      });
+    });
+    reloadBtn.onclick = () => {
+      chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        if (tabs[0]) chrome.tabs.reload(tabs[0].id);
+      });
+    };
+  </script>
+</body>
+</html>
